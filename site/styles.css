@@ -122,3 +122,4 @@ p code { padding: 1px 5px; border-radius: 5px; background: var(--code); border: 
   .section { padding-top: 72px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+@media (max-width: 640px) { h1 br { display: none; } h1 { font-size: 40px; } .cmd { display: flex; } }
