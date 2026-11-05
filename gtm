@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# Admin commands for a running install:  ./gtm <command> [args]
+#   ./gtm kill on --reason "checking something"     stop all sending (./gtm kill off to resume)
+#   ./gtm import-leads data/leads.csv --source my-list --terms-ok
+#   ./gtm suppress someone@example.com              never email them again
+#   ./gtm mailbox resume alex@yourdomain.com
+#   ./gtm dns-check yourdomain.com
+#   ./gtm config:check
+# Runs inside the app container started by `docker compose up -d` (files in ./data are visible as data/...).
+# Without Docker (pnpm dev setup), use `pnpm gtm <command>` instead.
+set -e
+cd "$(dirname "$0")"
+if [ $# -eq 0 ]; then sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0; fi
+exec docker compose exec app node dist/cli.mjs "$@"

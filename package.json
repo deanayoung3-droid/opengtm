@@ -1,0 +1,51 @@
+{
+  "name": "opengtm",
+  "description": "Self-hosted AI outbound email: finds leads, researches them, writes honest personalized emails, sends from your own mailboxes and handles replies.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file-if-exists=.env apps/worker/src/cli.ts migrate",
+    "worker": "tsx --env-file-if-exists=.env apps/worker/src/index.ts",
+    "start:all": "tsx --env-file-if-exists=.env apps/worker/src/start.ts",
+    "bundle": "node scripts/bundle-worker.mjs",
+    "gtm": "tsx --env-file-if-exists=.env apps/worker/src/cli.ts",
+    "web:dev": "pnpm --filter @opengtm/web dev",
+    "web:build": "pnpm --filter @opengtm/web build",
+    "llm:smoke": "tsx --env-file-if-exists=.env scripts/llm-smoke.ts",
+    "eval:replies": "tsx --env-file-if-exists=.env scripts/eval-replies.ts",
+    "eval:drafts": "tsx --env-file-if-exists=.env scripts/eval-drafts.ts",
+    "eval:research": "tsx --env-file-if-exists=.env scripts/eval-research.ts",
+    "dev:db": "pglite-server --db=./.devdb --port=55432 --max-connections=20",
+    "dev:seed": "tsx --env-file-if-exists=.env scripts/dev-seed.ts",
+    "live:trial": "tsx --env-file-if-exists=.env scripts/live-trial.ts"
+  },
+  "devDependencies": {
+    "@opengtm/core": "workspace:*",
+    "@opengtm/health": "workspace:*",
+    "@opengtm/infra": "workspace:*",
+    "@opengtm/leads": "workspace:*",
+    "@opengtm/learning": "workspace:*",
+    "@opengtm/replies": "workspace:*",
+    "@opengtm/research": "workspace:*",
+    "@opengtm/sequencer": "workspace:*",
+    "@opengtm/verify": "workspace:*",
+    "@opengtm/writer": "workspace:*",
+    "@electric-sql/pglite-socket": "0.2.14",
+    "@types/node": "24.19.2",
+    "drizzle-kit": "0.31.11",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}

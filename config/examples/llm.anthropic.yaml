@@ -1,0 +1,33 @@
+# Anthropic models for every job. Copy over config/llm.yaml and set ANTHROPIC_API_KEY in .env.
+# A fast, inexpensive model checks, sorts and extracts; a stronger one writes emails and reply drafts.
+# pricing: fill in USD per 1M tokens from your provider's price list. Without prices the spend ledger
+# records AI calls at $0 and the daily spend cap can't see AI spend.
+providers:
+  anthropic: {api_key_env: ANTHROPIC_API_KEY}
+pricing: {}
+  # claude-haiku-5-5: {in: <input>, out: <output>}
+  # claude-sonnet-5-5: {in: <input>, out: <output>}
+retries: 2
+tasks:
+  icp_score:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 4000}
+  lead_tagging:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 4000}
+  research_extract:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 8000}
+  write_email:
+    - {provider: anthropic, model: claude-sonnet-5-5, max_tokens: 16000}
+  critic:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 8000}
+  compliance_check:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 4000}
+  reply_classify:
+    - {provider: anthropic, model: claude-haiku-5-5, max_tokens: 4000}
+  reply_classify_escalate:
+    - {provider: anthropic, model: claude-sonnet-5-5, max_tokens: 4000}
+  reply_draft:
+    - {provider: anthropic, model: claude-sonnet-5-5, max_tokens: 16000}
+  segment_insights:
+    - {provider: anthropic, model: claude-sonnet-5-5, max_tokens: 16000}
+  lead_brief:
+    - {provider: anthropic, model: claude-sonnet-5-5, max_tokens: 8000}

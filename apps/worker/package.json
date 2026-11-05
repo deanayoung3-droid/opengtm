@@ -1,0 +1,28 @@
+{
+  "name": "@opengtm/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@opengtm/core": "workspace:*",
+    "@opengtm/health": "workspace:*",
+    "@opengtm/learning": "workspace:*",
+    "@opengtm/leads": "workspace:*",
+    "@opengtm/replies": "workspace:*",
+    "@opengtm/research": "workspace:*",
+    "@opengtm/sequencer": "workspace:*",
+    "@opengtm/verify": "workspace:*",
+    "@opengtm/writer": "workspace:*",
+    "drizzle-orm": "0.45.4",
+    "nodemailer": "7.0.13",
+    "pg-boss": "12.38.0",
+    "@opengtm/infra": "workspace:*"
+  },
+  "exports": {
+    "./context": "./src/context.ts",
+    "./jobs": "./src/jobs.ts"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "7.0.12"
+  }
+}

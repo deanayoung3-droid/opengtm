@@ -1,0 +1,2 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><defs><clipPath id="trib"><path d="M21.00 19.48Q8.00 12.00 8.00 27.00L8.00 73.00Q8.00 88.00 21.00 80.52L61.00 57.48Q74.00 50.00 61.00 42.52Z"/></clipPath></defs>
+<path d="M21.00 19.48Q8.00 12.00 8.00 27.00L8.00 73.00Q8.00 88.00 21.00 80.52L61.00 57.48Q74.00 50.00 61.00 42.52Z" fill="#f4f4f5"/><path d="M42 50a26 26 0 1 0 52 0a26 26 0 1 0 -52 0Z" fill="#a1a1aa"/><path d="M42 50a26 26 0 1 0 52 0a26 26 0 1 0 -52 0Z" fill="#0a0a0a" clip-path="url(#trib)"/></svg>

@@ -1,0 +1,82 @@
+# The whole app on any machine with Docker: Postgres plus one app container (dashboard + background worker).
+#   docker compose up -d                      # start (builds the image the first time)
+#   docker compose logs -f app                # watch it work
+#   docker compose --profile backup up -d     # also take nightly database backups into ./backups
+#   docker compose --profile https up -d      # also serve https://$GTM_DOMAIN with an automatic certificate
+# Settings come from .env (run `node scripts/setup.mjs`, or copy .env.example). The dashboard is on
+# http://localhost:8080; see docs/DEPLOY.md for putting it on the internet with HTTPS.
+name: opengtm
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: gtm
+      POSTGRES_DB: gtm
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env (pnpm setup does it)}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gtm -d gtm"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    # Not published to the host: only the app can reach it.
+
+  app:
+    build: .
+    image: opengtm:latest
+    restart: always
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://gtm:${POSTGRES_PASSWORD}@postgres:5432/gtm
+      TZ: ${TEAM_TIMEZONE:-America/Los_Angeles}
+    volumes:
+      - ./config:/app/config:ro      # edit config/*.yaml on the host, then `docker compose restart app`
+      - ./data:/app/data:ro          # lead lists to import with ./gtm import-leads data/<file>.csv
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging:
+      driver: json-file
+      options: { max-size: "20m", max-file: "5" }
+
+  backup:
+    build: ./deploy/backup
+    profiles: ["backup"]
+    restart: always
+    env_file: .env
+    environment:
+      PGHOST: postgres
+      PGUSER: gtm
+      PGDATABASE: gtm
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${TEAM_TIMEZONE:-America/Los_Angeles}
+    volumes:
+      - ./backups:/backups
+      # Offsite copies: put an rclone.conf in ./secrets and set RCLONE_REMOTE in .env.
+      - ./secrets:/config/rclone:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  https:
+    # Caddy gets and renews a free HTTPS certificate for GTM_DOMAIN (point its DNS A record at this server
+    # and open ports 80 and 443 first). Then set PUBLIC_BASE_URL=https://$GTM_DOMAIN in .env.
+    image: caddy:2.10-alpine
+    profiles: ["https"]
+    restart: always
+    command: caddy reverse-proxy --from ${GTM_DOMAIN:?set GTM_DOMAIN in .env, e.g. gtm.yourcompany.com} --to app:8080
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy-data:/data
+    depends_on: [app]
+
+volumes:
+  pgdata:
+  caddy-data:

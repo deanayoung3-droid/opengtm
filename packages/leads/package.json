@@ -1,0 +1,15 @@
+{
+  "name": "@opengtm/leads",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@opengtm/core": "workspace:*",
+    "@opengtm/research": "workspace:*",
+    "drizzle-orm": "0.45.4",
+    "fflate": "0.8.2",
+    "zod": "4.6.7"
+  }
+}

@@ -1,0 +1,104 @@
+# Operational knobs. Everything here is safe to change without code changes; restart the app after editing.
+# Values like ${NAME} are read from the environment (.env).
+caps:
+  daily_send_cap: 200            # global, across all mailboxes; each mailbox's own ramp below still applies
+  daily_spend_cap_usd: 10        # AI + verification + other metered spend per day (team time zone)
+  per_lead_llm_cap_usd: 0.15
+  role_address_daily_cap: 5      # info@/office@ style addresses allowed per day
+  allow_role_addresses: false
+qualify:
+  threshold: 60                  # 0-100 fit score; below this a company is dropped (with the reason stored)
+  max_company_size: 50           # companies with more people than this are dropped
+leads:
+  companies_per_segment_per_run: 50   # ceiling per campaign per weekday run; each run asks only for what the mailboxes can send
+  ai_ark:                        # optional lead source (docs.ai-ark.com); needs AI_ARK_API_KEY and AI_ARK_TERMS_OK=1
+    credit_usd: 0.0098           # what one credit costs on your plan, for the spend ledger
+    max_credits_per_month: 1000  # your plan's monthly credits
+    renews_on_day: 1             # day of the month your plan renews (credits reset)
+    preview: true                # search with People Preview and pay only for one email per new company
+    max_credits_per_run: 200     # ceiling per weekday run
+    stock_days: 3                # buy only enough leads to keep 3 days of first emails waiting
+    credits_per_person: 1.1      # average credits per emailable person (preview share + email lookups)
+    max_exports_per_company: 2   # pay for at most 2 email lookups per company (best role first)
+    page_size: 10                # people per search page. Don't change once leads are flowing: the saved position is a page number
+    employee_min: 1
+    employee_max: 50
+    industries: []               # AI Ark industry names, e.g. ["construction", "facilities services"]; empty = any
+    extra_titles: [founder, co-founder, ceo, president]   # searched after the ICP roles, so decision makers still come first
+    search_version: 1            # bump whenever titles, company size or industries change (the search starts over)
+verify:
+  provider: zerobounce           # zerobounce | mock (mock = no real checks; only for trying the app out)
+  cost_per_check_usd: 0.0195     # ZeroBounce price per check on your plan (the free plan is 100 checks a month)
+  # Sources that verify emails themselves. With ZEROBOUNCE_API_KEY set, ZeroBounce is a second opinion on them:
+  # addresses it says will bounce are dropped; catch-all and unknown keep the source's verdict. Everything else
+  # needs ZeroBounce "valid". The 2% bounce guardrail still pauses any mailbox that bounces too much.
+  trust_sources: [ai_ark]
+research:
+  max_pages: 6
+  min_facts_for_personalization: 1
+  user_agent: "OpenGTM-Research/1.0"
+  request_delay_ms: 1500
+writer:
+  max_regenerations: 2
+  min_words: 50
+  followup_min_words: 25        # follow-ups can be three short lines
+  max_words: 90                 # what the writer aims for
+  word_slack: 10                # still accepted up to 100: models miscount by a few words
+  critic_threshold: 70          # below this -> human approval
+approval:
+  # New installs: a person approves the first 50 emails on Approvals, then emails that pass every check
+  # send by themselves (anything the checker flags still waits). Set to 0 for full autopilot from day one.
+  require_first_n: 50
+  sample_rate: 0                 # also hold this share of later emails for a person (0.1 = 10%)
+  force_all: false               # the Settings page can still force approval of everything
+sequence:
+  steps:
+    - {step: 1, day: 0}          # stop on any reply, bounce or unsubscribe
+    - {step: 2, day: 7}          # a plain follow-up a week later, only if they never replied
+  one_contact_per_company: true
+ramp:
+  tiers:                         # per mailbox. These suit pre-warmed mailboxes bought from a vendor.
+    - {from_week: 1, per_day: 15}
+    - {from_week: 2, per_day: 25}
+    - {from_week: 3, per_day: 35}
+  # Brand-new mailboxes (NOT pre-warmed)? Replace the three tiers above with these and keep seed tests on:
+  #   - {from_week: 1, per_day: 3}
+  #   - {from_week: 2, per_day: 6}
+  #   - {from_week: 3, per_day: 10}
+  #   - {from_week: 4, per_day: 15}
+  #   - {from_week: 6, per_day: 25}
+  hard_max_per_day: 40
+  hold_below_health: 70          # health score under this freezes the ramp at tier 1
+timing:
+  business_start: "09:00"        # in each recipient's own time zone (inferred from their state)
+  business_end: "16:30"
+  send_weekends: false
+  send_days: [mon, tue, wed, thu, fri]   # adding sun lands Sunday sends at the top of Monday's inbox
+  jitter_min_s: 30
+  jitter_max_s: 300
+health:
+  max_bounce_rate: 0.02
+  bounce_min_sample: 20
+  bounce_min_count: 3            # a healthy list bounces well under 1%, so 2 in a mailbox's first 50 sends is luck; it takes 3 and 2%
+  bounce_window_days: 14
+  max_complaint_rate: 0.001
+  min_seed_placement: 0.85
+  seed_inboxes: []               # inboxes you own, for placement tests: [{address: seed1@gmail.com, provider: google, imap_env: SEED1_IMAP}]
+learning:
+  auto_pause_min_sends: 150
+  max_cost_per_positive_usd: 40
+  min_sends_per_variant: 100
+  significance: 0.05
+replies:
+  classify_min_confidence: 0.6   # below -> second look on the escalation model
+  retouch_days: 75
+  require_reply_approval: true   # drafts always wait for a person or the auto-reply timer below
+  auto_reply:                    # objections get a drafted answer that sends by itself after this review window
+    enabled: true
+    delay_minutes: 240
+alerts:
+  channels: [console, team_email]  # team_email = emails to teammates per their Settings toggles; also ntfy | slack | email | sms
+savings:                        # optional: "Saved vs ..." on the dashboard, against the tools this replaces
+  replaces: []                  # e.g. [{name: "SomeTool", plan: "Pro", per_email_usd: 0.03, monthly_usd: 99}]
+  our_fixed: []                 # what running it yourself costs each month, e.g. [{name: Mailboxes, monthly_usd: 40}]
+  since: "2026-01-01"           # first day of your own setup

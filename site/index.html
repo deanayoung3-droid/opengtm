@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenGTM: self-hosted AI outbound email</title>
+  <meta name="description" content="Open-source, self-hosted AI outbound email. Finds companies that fit, researches each one, writes short honest emails, sends from your own mailboxes, and hands you the people who say yes.">
+  <meta property="og:title" content="OpenGTM: self-hosted AI outbound email">
+  <meta property="og:description" content="Finds leads, researches them, writes honest emails, sends from your own mailboxes, and hands you the hot leads. Open source, MIT.">
+  <meta property="og:image" content="assets/screenshots/dash-light.png">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#" aria-label="OpenGTM home">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="assets/logo-on-dark.svg">
+          <img src="assets/logo.svg" alt="OpenGTM" height="28">
+        </picture>
+      </a>
+      <nav class="links" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#cost">Cost</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/deanayoung3-droid/opengtm/tree/main/docs">Docs</a>
+      </nav>
+      <a class="btn btn-ghost gh" href="https://github.com/deanayoung3-droid/opengtm">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <a class="pill" href="https://github.com/deanayoung3-droid/opengtm">Open source <span class="dot"></span> MIT license <span class="arrow">→</span></a>
+      <h1>Outbound email that<br>does the work for you.</h1>
+      <p class="lede">OpenGTM finds companies that fit, researches each one, writes short honest emails, sends them from your own mailboxes, and hands you the people who say yes. Self-hosted. No seats, no platform fee.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#quickstart">Get started</a>
+        <a class="btn btn-ghost" href="https://github.com/deanayoung3-droid/opengtm">View on GitHub</a>
+      </div>
+      <div class="cmd" role="group" aria-label="Install command">
+        <code><span class="muted">$</span> git clone https://github.com/deanayoung3-droid/opengtm.git &amp;&amp; cd opengtm &amp;&amp; node scripts/setup.mjs</code>
+        <button class="copy" type="button" data-copy="git clone https://github.com/deanayoung3-droid/opengtm.git && cd opengtm && node scripts/setup.mjs" aria-label="Copy install command">Copy</button>
+      </div>
+    </section>
+
+    <section class="wrap shot-wrap">
+      <figure class="shot">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/dash-dark.png">
+          <img src="assets/screenshots/dash-light.png" alt="The OpenGTM dashboard: emails sent, replies, hot leads and what needs you" width="2400" height="1500">
+        </picture>
+      </figure>
+    </section>
+
+    <section class="wrap stats" aria-label="At a glance">
+      <div><b>9</b><span>stages, from lead to booked call</span></div>
+      <div><b>1</b><span>command to run it with Docker</span></div>
+      <div><b>~$0.05</b><span>per personalized email, all in</span></div>
+      <div><b>0</b><span>seats or platform fees</span></div>
+    </section>
+
+    <section id="how" class="wrap section">
+      <div class="head">
+        <p class="eyebrow">How it works</p>
+        <h2>From a list of companies to a booked call, every weekday.</h2>
+        <p>Each stage is a scheduled job that's safe to retry, so a crash or restart never sends twice.</p>
+      </div>
+      <picture class="graphic">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/pipeline-dark.svg">
+        <img src="assets/pipeline-light.svg" alt="Find, score, verify, research, write, check, send, read replies, hot lead" loading="lazy">
+      </picture>
+    </section>
+
+    <section id="features" class="wrap section">
+      <div class="head">
+        <p class="eyebrow">Features</p>
+        <h2>Everything outbound needs, in one place you own.</h2>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
+          <h3>Finds the right people</h3>
+          <p>Pulls companies and decision makers from a lead database, your CSV lists or company sites, and scores every one against the customers you describe.</p>
+        </article>
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></svg>
+          <h3>Researches each company</h3>
+          <p>Reads their own website and keeps facts with the page they came from, so every personal line can be traced to a source.</p>
+        </article>
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 19 1.5-5L16 4.5 19.5 8 10 17.5z"/></svg>
+          <h3>Writes honest emails</h3>
+          <p>Short, plain-text, one question. It may only claim what a fact or your proof points say; a checker and an AI reviewer block the rest.</p>
+        </article>
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12 20.5 4 16 20.5 12 14z"/><path d="m12 14 8.5-10"/></svg>
+          <h3>Sends from your mailboxes</h3>
+          <p>Google, Microsoft or any SMTP, in each recipient's business hours, ramping up slowly with one mailbox per conversation.</p>
+        </article>
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5 4 11l6 6"/><path d="M4 11h9a7 7 0 0 1 7 7v1"/></svg>
+          <h3>Handles every reply</h3>
+          <p>Labels each reply in context, stops the sequence, honors opt-outs, follows referrals, and drafts the answer.</p>
+        </article>
+        <article class="card">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 4.5 6.5 6 6.5 11a6.5 6.5 0 0 1-13 0c0-3.5 2-5 3-7.5 1 2.5 3.5 3.5 3.5 3.5z"/></svg>
+          <h3>Hands you hot leads</h3>
+          <p>When someone says yes you get an email right away, a drafted reply with your booking link, and a one-page brief for the call.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap section split">
+      <div class="head">
+        <p class="eyebrow">Honest by construction</p>
+        <h2>It can only say what it can back up.</h2>
+        <p>Every claim must cite a researched fact or one of your proof points. Numbers it can't cite, spam phrases, fake familiarity, fake urgency and fake "Re:" subjects are rejected before an email goes anywhere. You approve the first 50 yourself.</p>
+      </div>
+      <picture class="graphic">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/checks-dark.svg">
+        <img src="assets/checks-light.svg" alt="Facts and proof points go to the writer; every email is checked; it passes, is rewritten once, or waits for a person" loading="lazy">
+      </picture>
+    </section>
+
+    <section class="wrap section">
+      <div class="head">
+        <p class="eyebrow">Inbox</p>
+        <h2>Every reply, read and handled.</h2>
+        <p>Interested replies become hot leads with an answer ready. Objections get a respectful draft that sends after a review window. Opt-outs are suppressed forever.</p>
+      </div>
+      <figure class="shot">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/inbox-dark.png">
+          <img src="assets/screenshots/inbox-light.png" alt="A hot lead in the inbox with the conversation" loading="lazy" width="2400" height="1500">
+        </picture>
+      </figure>
+    </section>
+
+    <section class="wrap section">
+      <div class="head">
+        <p class="eyebrow">Deliverability</p>
+        <h2>Built not to burn your domains.</h2>
+        <p>Guardrails run on their own every few minutes, and new mailboxes ramp up slowly.</p>
+      </div>
+      <picture class="graphic">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/guardrails-dark.svg">
+        <img src="assets/guardrails-light.svg" alt="Pauses at 2% bounces and 0.1% complaints, retires below 85% inbox placement, a kill switch, daily caps, and permanent suppression" loading="lazy">
+      </picture>
+      <picture class="graphic">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/ramp-dark.svg">
+        <img src="assets/ramp-light.svg" alt="Each mailbox ramps from 15 to 35 emails a day; a global daily cap limits the total" loading="lazy">
+      </picture>
+    </section>
+
+    <section id="cost" class="wrap section">
+      <div class="head">
+        <p class="eyebrow">Cost</p>
+        <h2>No seats. No platform fee.</h2>
+        <p>You pay only for what you use: an AI key, mailboxes, verification and lead data. Every cost is logged, and a daily cap stops paid calls.</p>
+      </div>
+      <picture class="graphic">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/cost-dark.svg">
+        <img src="assets/cost-light.svg" alt="An example month: about 160 dollars for about 3,000 emails" loading="lazy">
+      </picture>
+    </section>
+
+    <section id="quickstart" class="wrap section">
+      <div class="head">
+        <p class="eyebrow">Quickstart</p>
+        <h2>Running in about five minutes.</h2>
+        <p>You need Docker and Node.js 22 or newer. Nothing sends until you've added your postal address, a sender and mailboxes.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <div><h3>Clone it</h3><pre><code>git clone https://github.com/deanayoung3-droid/opengtm.git
+cd opengtm</code></pre></div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <div><h3>Answer a few questions</h3><pre><code>node scripts/setup.mjs</code></pre><p>Writes your settings and drafts your business profile from your website.</p></div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <div><h3>Start it</h3><pre><code>docker compose up -d</code></pre><p>Open <code>localhost:8080</code> and follow the checklist on the dashboard.</p></div>
+        </li>
+      </ol>
+      <p class="more">Next: the <a href="https://github.com/deanayoung3-droid/opengtm/blob/main/docs/SETUP.md">setup guide</a> covers mailboxes, DNS, leads and verification. <a href="https://github.com/deanayoung3-droid/opengtm/blob/main/docs/DEPLOY.md">Deploying</a> covers a server, HTTPS and backups.</p>
+    </section>
+
+    <section id="faq" class="wrap section faq">
+      <div class="head">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions</h2>
+      </div>
+      <details>
+        <summary>Is cold email legal?</summary>
+        <p>In the US, yes, when it's honest and easy to opt out of (CAN-SPAM). OpenGTM is US-only by design: it won't send without your real postal address, every email says who it's from and has a working unsubscribe, and opt-outs are permanent.</p>
+      </details>
+      <details>
+        <summary>Which AI models does it use?</summary>
+        <p>OpenAI by default, Anthropic with one config file, or a local model through any OpenAI-compatible server like Ollama. Each job (writing, checking, sorting replies) can use a different model.</p>
+      </details>
+      <details>
+        <summary>Do I need my own mailboxes?</summary>
+        <p>Yes. Use inboxes on domains that aren't your main one, so your real domain is never at risk. Pre-warmed inboxes from a vendor are the fastest start; upload their CSV and each login is tested.</p>
+      </details>
+      <details>
+        <summary>Where do leads come from?</summary>
+        <p>AI Ark's people search is built in. You can also import your own CSV lists, or find people on companies' own websites. Only use lead data whose terms allow outbound email.</p>
+      </details>
+      <details>
+        <summary>Does it send without me?</summary>
+        <p>After you approve the first 50 emails, emails that pass every check send on their own, inside caps and business hours. Anything the checker flags waits for you, hot leads always get a person's reply, and a kill switch stops everything at once.</p>
+      </details>
+      <details>
+        <summary>Where does my data live?</summary>
+        <p>In your own Postgres database, on your own server. Nothing is sent anywhere except to the services you configure: your AI provider, your mailboxes, and your verification and lead providers.</p>
+      </details>
+    </section>
+
+    <section class="wrap final">
+      <h2>Own your outbound.</h2>
+      <p>Free and open source under the MIT license.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#quickstart">Get started</a>
+        <a class="btn btn-ghost" href="https://github.com/deanayoung3-droid/opengtm">Star on GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/logo-on-dark.svg">
+      <img src="assets/logo.svg" alt="OpenGTM" height="22">
+    </picture>
+    <span>MIT license · <a href="https://github.com/deanayoung3-droid/opengtm">GitHub</a> · <a href="https://github.com/deanayoung3-droid/opengtm/tree/main/docs">Docs</a> · <a href="https://github.com/deanayoung3-droid/opengtm/issues">Issues</a></span>
+  </footer>
+
+  <script>
+    document.querySelectorAll("[data-copy]").forEach((b) => {
+      b.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "Copied"; } catch { b.textContent = "Select and copy"; }
+        setTimeout(() => (b.textContent = "Copy"), 1600);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+[
+  {
+    "label": "interested",
+    "subject": "Re: scheduling at your company",
+    "body": "Hi Jamie, timing is good actually. We're fed up with our current scheduling setup. Can you send a few times next week for a demo?"
+  },
+  {
+    "label": "interested",
+    "subject": "Re: customer reminders",
+    "body": "Sure, I'd take a look. Thursday afternoon works for me."
+  },
+  {
+    "label": "interested",
+    "subject": "Re: scheduling at your company",
+    "body": "Yes please. Our office manager Carla and I would both want to see it. What does your calendar look like?"
+  },
+  {
+    "label": "question",
+    "subject": "Re: scheduling at your company",
+    "body": "Does Northwind handle recurring maintenance plans, and can we import our customers from Jobber?"
+  },
+  {
+    "label": "question",
+    "subject": "Re: quick question",
+    "body": "What does it cost per user? We have three technicians and two staff."
+  },
+  {
+    "label": "question",
+    "subject": "Re: customer reminders",
+    "body": "Is there a mobile app? I'm on job sites most days."
+  },
+  {
+    "label": "objection",
+    "subject": "Re: scheduling at your company",
+    "body": "Thanks, but we just renewed with Housecall Pro for another year and switching mid-contract isn't realistic."
+  },
+  {
+    "label": "objection",
+    "subject": "Re: customer reminders",
+    "body": "Honestly every one of these tools says it's simple. We tried two and both were a mess. Not sure why yours would be different."
+  },
+  {
+    "label": "objection",
+    "subject": "Re: quick question",
+    "body": "We're a two-person shop. Software like this is overkill for us, spreadsheets work fine."
+  },
+  {
+    "label": "not_now",
+    "subject": "Re: scheduling at your company",
+    "body": "Not a good time, we're in the middle of moving offices. Try me again in the spring."
+  },
+  {
+    "label": "not_now",
+    "subject": "Re: customer reminders",
+    "body": "Maybe after tax season. Reach back out in May?"
+  },
+  {
+    "label": "not_now",
+    "subject": "Re: quick question",
+    "body": "Could be interesting down the road but we have no bandwidth this quarter."
+  },
+  {
+    "label": "wrong_person",
+    "subject": "Re: scheduling at your company",
+    "body": "I'm a technician here, I don't make these decisions."
+  },
+  {
+    "label": "wrong_person",
+    "subject": "Re: customer reminders",
+    "body": "I don't handle any of the software stuff, sorry."
+  },
+  {
+    "label": "referral",
+    "subject": "Re: scheduling at your company",
+    "body": "You'll want to talk to our company administrator, Dana Whitfield (dana@whitfieldlaw.example). She runs billing."
+  },
+  {
+    "label": "referral",
+    "subject": "Re: quick question",
+    "body": "Copying Marcus, our office manager, he picks our tools. marcus.lee@brookslegal.example"
+  },
+  {
+    "label": "referral",
+    "subject": "Re: customer reminders",
+    "body": "Please reach out to my partner Sam Ortiz instead, he's looking at new systems."
+  },
+  {
+    "label": "out_of_office",
+    "subject": "Automatic reply: scheduling at your company",
+    "headers": {
+      "auto-submitted": "auto-replied"
+    },
+    "body": "I am out of the office until November 2 with limited access to email. For urgent matters call the front desk."
+  },
+  {
+    "label": "out_of_office",
+    "subject": "Out of Office",
+    "body": "Thank you for your email. I'm on vacation and will return on 11/9. I will respond when I'm back."
+  },
+  {
+    "label": "out_of_office",
+    "subject": "Re: customer reminders",
+    "body": "I'm in trial through the end of next week and not checking email regularly. I'll get back to you after."
+  },
+  {
+    "label": "unsubscribe",
+    "subject": "Re: scheduling at your company",
+    "body": "unsubscribe"
+  },
+  {
+    "label": "unsubscribe",
+    "subject": "Re: quick question",
+    "body": "Please remove me from your list."
+  },
+  {
+    "label": "unsubscribe",
+    "subject": "Re: customer reminders",
+    "body": "Not interested. Please don't email anyone at our company again."
+  },
+  {
+    "label": "hostile",
+    "subject": "Re: scheduling at your company",
+    "body": "How did you get this address? This is spam and I'm reporting it. Do not contact me again."
+  },
+  {
+    "label": "hostile",
+    "subject": "Re: quick question",
+    "body": "Stop harassing law offices with this garbage. I'll be filing a complaint."
+  },
+  {
+    "label": "bounce",
+    "subject": "Undeliverable: scheduling at your company",
+    "body": "Delivery has failed to these recipients or groups: the email address you entered couldn't be found."
+  },
+  {
+    "label": "other",
+    "subject": "Re: scheduling at your company",
+    "body": "Who is this?"
+  },
+  {
+    "label": "interested",
+    "subject": "Re: customer reminders",
+    "body": "👍"
+  },
+  {
+    "label": "interested",
+    "subject": "Re: quick question",
+    "body": "We've been looking for something exactly like this. Happy to hop on a call, my cell is best."
+  },
+  {
+    "label": "question",
+    "subject": "Re: scheduling at your company",
+    "body": "Before I agree to anything, do you support LawPay and QuickBooks Online?"
+  }
+]

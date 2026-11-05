@@ -1,0 +1,38 @@
+# Which AI model does each job. Each task lists routes in order: the first is primary, the rest are fallbacks.
+# Default: one inexpensive OpenAI model for everything (set OPENAI_API_KEY). To use Anthropic instead, copy
+# config/examples/llm.anthropic.yaml over this file (set ANTHROPIC_API_KEY). Any OpenAI-compatible local
+# server (Ollama, vLLM, llama.cpp) works too: see config/examples/llm.local.yaml.
+#
+# effort: how much a reasoning model thinks before answering (billed as output). Checking, sorting and
+# extraction run on "low"; writing emails and reply drafts keep the model's default.
+# pricing: USD per 1M tokens (input/output), used for the spend ledger and the daily spend cap. Keep it in
+# line with your provider's price list; an unlisted API model is charged at the highest listed price.
+providers:
+  openai: {api_key_env: OPENAI_API_KEY}
+pricing:
+  gpt-6-luna: {in: 0.10, out: 0.50}
+  gpt-6.1-sol: {in: 2.0, out: 10.0}
+retries: 2
+tasks:
+  icp_score:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 4000, effort: low}
+  lead_tagging:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 4000, effort: low}
+  research_extract:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 8000, effort: low}
+  write_email:                      # reply rates live here: the first task to move to a stronger model
+    - {provider: openai, model: gpt-6-luna, max_tokens: 16000}
+  critic:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 8000, effort: low}
+  compliance_check:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 4000, effort: low}
+  reply_classify:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 4000, effort: low}
+  reply_classify_escalate:          # second look when the first label is unsure (< replies.classify_min_confidence)
+    - {provider: openai, model: gpt-6-luna, max_tokens: 4000}
+  reply_draft:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 16000}
+  segment_insights:
+    - {provider: openai, model: gpt-6-luna, max_tokens: 16000}
+  lead_brief:                       # demo prep for each hot lead (a handful a day)
+    - {provider: openai, model: gpt-6-luna, max_tokens: 8000}

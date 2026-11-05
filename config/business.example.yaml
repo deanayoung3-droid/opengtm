@@ -1,0 +1,58 @@
+# Your business, as the agents see it. Everything here can also be edited in the dashboard (Project docs),
+# which is easier and takes effect on the next draft; this file is only the starting point.
+#
+# `pnpm setup` writes config/business.yaml for you (it can draft it from your website). Without that file
+# the app runs on this example, a made-up company, and refuses to send until you add a real postal address
+# and senders.
+#
+# The writer may ONLY make claims found in proof_points (about you) or in facts it researched (about them),
+# so put real, specific, true statements here.
+company:
+  name: Northwind
+  site: https://northwind.example.com
+  one_liner: "Scheduling and dispatch software for small field-service teams"
+  thesis: "Small service companies still run their day on a whiteboard and a group text, so jobs get double-booked and customers wait"
+  strengths: [drag-and-drop dispatch board, automatic customer reminders, technician mobile app, invoicing from the job]
+  proof_points:           # the only specific claims emails may make about you (true, specific, checkable)
+    - {id: pp1, text: "Most teams are set up in one afternoon, with our team importing their customer list"}
+    - {id: pp2, text: "Northwind costs $29 per month for the whole office, not per technician"}
+    - {id: pp3, text: "Customers get an automatic text the day before and when the technician is on the way"}
+  banned_claims: ["/guarantee(d)?/i", "#1"]   # never say these (plain phrases or /regex/i)
+  booking_link: ""        # e.g. https://cal.com/you/intro: goes only in replies to people who wrote back
+  physical_address: ""    # REQUIRED before sending: CAN-SPAM requires your postal address in every email
+  offer: "a 2-minute video showing a day on the dispatch board"   # what replying with the reply word gets them
+  pricing: "$29 per month for the whole office; no per-user fees"
+  logo: ""                # optional PNG for the email signature, relative to this folder (e.g. logo.png)
+  logo_dark: ""           # optional white version for mail apps in dark mode
+competitors: [Jobber, Housecall Pro, ServiceTitan]   # names only; the writer never makes claims about them
+facts: |
+  - Northwind works on any phone or computer; technicians use the mobile app.
+  - Setup includes importing customers from a spreadsheet.
+outreach:
+  instructions: |
+    Keep it short and specific to their business. Casual, plain tone.
+  cta_reply: "yes"        # the one word the first email asks them to reply with to get the offer
+  reply_cc: []            # copied on every reply we send, so a person sees each conversation
+  demo_offer: "a quick call with our team"   # what replies offer after the offer itself, booked at booking_link
+  yes_reply: ""           # optional: your exact answer to a plain "yes" ({{first_name}}, {{booking_link}} filled in); blank = the AI writes it
+  subject_lines_b: []     # optional: subjects to test against the default (version B), used exactly as written
+senders:                  # names shown in From: real team members (or names your company approved), one per mailbox
+  - {name: "", title: "", reply_to: ""}
+icp:
+  segments:               # each segment becomes a campaign; keywords decide which companies match
+    - id: hvac
+      description: "Small HVAC and plumbing companies (2-30 technicians)"
+      keywords: [hvac, heating, air conditioning, plumbing, plumber, furnace]
+    - id: cleaning
+      description: "Commercial and residential cleaning companies"
+      keywords: [cleaning, janitorial, maid service, carpet cleaning]
+    - id: landscaping
+      description: "Landscaping and lawn care companies"
+      keywords: [landscaping, lawn care, tree service, irrigation]
+    - id: roofing
+      description: "Roofing and exterior contractors"
+      keywords: [roofing, roofer, gutters, siding]
+  roles: [owner, founder, ceo, president, general manager, operations manager, office manager]   # in order of who to email first
+  geo: [US]               # US only: the compliance rules are built for CAN-SPAM
+  exclude_domains: []
+signals: [hiring, new_office_or_launch, mentions_competitor]   # what research looks for on their site (raises priority)

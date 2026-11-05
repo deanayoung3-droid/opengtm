@@ -1,0 +1,34 @@
+# A local, OpenAI-compatible model server (Ollama, vLLM, llama.cpp) for every job: no per-token cost.
+# Copy over config/llm.yaml and set in .env:
+#   LOCAL_LLM_BASE_URL=http://localhost:11434/v1   (Ollama's OpenAI-compatible endpoint)
+#   LOCAL_LLM_API_KEY=ollama                         (any non-empty value for servers without keys)
+#   LOCAL_LLM_MODEL=<the model name your server serves>
+# Small local models write weaker emails: a common mix is local for checking and sorting, plus an API
+# model for write_email and reply_draft (add an openai or anthropic provider and route those two tasks to it).
+providers:
+  local: {base_url_env: LOCAL_LLM_BASE_URL, api_key_env: LOCAL_LLM_API_KEY}
+pricing: {}
+retries: 2
+tasks:
+  icp_score:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 4000}
+  lead_tagging:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 4000}
+  research_extract:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 8000}
+  write_email:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 16000}
+  critic:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 8000}
+  compliance_check:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 4000}
+  reply_classify:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 4000}
+  reply_classify_escalate:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 4000}
+  reply_draft:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 16000}
+  segment_insights:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 16000}
+  lead_brief:
+    - {provider: local, model: ${LOCAL_LLM_MODEL}, max_tokens: 8000}

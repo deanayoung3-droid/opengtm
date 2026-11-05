@@ -1,0 +1,27 @@
+node_modules
+.env
+.env.*
+!.env.example
+.next
+dist
+coverage
+*.log
+backups/
+secrets/
+.devdb
+.devdb-demo
+
+# Your business details and logo (written by `pnpm setup`); the example ships instead
+config/business.yaml
+config/*.png
+
+# Lead lists and other files you feed the app (personal data): only the examples are tracked
+data/*
+!data/README.md
+!data/leads.example.csv
+
+# Build caches
+*.tsbuildinfo
+
+# The website reads docs/assets; locally it is a symlink, on GitHub Pages a copy (see .github/workflows/pages.yml)
+site/assets

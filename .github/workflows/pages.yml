@@ -1,0 +1,31 @@
+# Publishes the website in site/ to GitHub Pages. The README graphics in docs/assets are copied in at build
+# time, so there is one copy of each image in the repo.
+name: Website
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "docs/assets/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add the shared images
+        run: rm -rf site/assets && cp -r docs/assets site/assets
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
