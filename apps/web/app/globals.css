@@ -750,7 +750,7 @@ tr.total td { background: var(--surface-2); font-weight: 600; color: var(--ink);
 kbd { font: 500 11px var(--font); padding: 1px 5px; border-radius: 5px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35); opacity: 0.85; }
 .composer-done { display: flex; align-items: center; gap: 8px; margin: 0 18px 18px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink-3); }
 .composer-done svg { color: var(--brand-ink); }
-@media (max-width: 1000px) { .inbox { grid-template-columns: 1fr; } .inbox-list { position: static; } .convo-list { max-height: 380px; } .composer-box .bar .hint { display: none; } }
+@media (max-width: 1000px) { .inbox { grid-template-columns: minmax(0, 1fr); } .inbox-list { position: static; } .convo-list { max-height: 380px; } .composer-box .bar .hint { display: none; } }
 
 /* ---------- Team / workspace ---------- */
 .invite-row { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto; gap: 12px; align-items: end; padding: 14px 16px; }
