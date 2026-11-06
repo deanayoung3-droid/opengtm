@@ -10,3 +10,5 @@ apps/web/.next
 backups
 secrets
 *.log
+site
+docs/assets
